@@ -23,24 +23,24 @@ jobs:
           java-version: '8'
 
       - name: Build Jar
-        run: pwd && bash crack.sh ${{ github.event.inputs.tag_name }}
+        run: bash crack.sh ${{ github.event.inputs.tag_name }}
 
-      - name: Upload Zip
-        uses: actions/upload-artifact@v4
-        with:
-          name: x-pack-core-${{ github.event.inputs.tag_name }}
-          path: output/*.jar
-          
-      - name: Check Files
-        run: pwd && ls ./output/
-        
-      - name: Upload Jar to GitHub Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: /home/runner/work/crack-es-lic/crack-es-lic/output/*.jar
-          allowUpdates: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.event.inputs.tag_name }}
-          body: |
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Upload Jar
+      uses: actions/download-artifact@v2
+      with:
+        path: output
+    - name: Upload Jar to GitHub Releases
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: output/*.jar
+        generateReleaseNotes: true
+        allowUpdates: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.event.inputs.tag_name }}
+        body: |
             This release includes:
             - Built Jar on GitHub Actions.
