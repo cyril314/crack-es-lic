@@ -1,0 +1,43 @@
+name: build
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Version tag name'
+        required: true
+        default: '8.0.0'
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '8'
+
+      - name: Build jar
+        run: bash build_crack_jar.sh ${{ github.event.inputs.tag_name }}
+
+      - name: Upload jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: es-jar
+          path: ./output/*.jar
+          
+      - name: Upload Jar to GitHub Releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: app/build/outputs/apk/release/*.apk
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.event.inputs.tag_name }}
+          name: "Jar Release"
+          body: |
+            This release includes:
+            - Built Jar on GitHub Actions.
