@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: x-pack-core-${{ github.event.inputs.tag_name }}
-          path: output
+          path: output/*.*
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
