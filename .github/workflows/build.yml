@@ -28,14 +28,12 @@ jobs:
       - name: Upload Jar
         uses: actions/download-artifact@v4
         with:
-          path: output/*.jar
+          path: ./output/*.jar
           
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: output/*.jar
-          generateReleaseNotes: true
-          allowUpdates: true
+          artifacts: ./output/*.jar
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.inputs.tag_name }}
           body: |
