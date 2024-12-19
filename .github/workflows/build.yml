@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build Jar
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,10 +27,10 @@ jobs:
 
   release:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Build Jar
-        run: pwd && ls ./output
+        run: pwd && ls .
       - name: Upload Jar
         uses: actions/download-artifact@v4
         with:
