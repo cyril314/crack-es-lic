@@ -33,7 +33,7 @@ jobs:
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: output/*.*
+          artifacts: ./*.*
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.inputs.tag_name }}
           name: "Jar Release"
