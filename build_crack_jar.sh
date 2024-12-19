@@ -1,5 +1,6 @@
 #!/bin/bash
 v=( ${VERSION//./ } )
+echo "$v"
 branch="${v[0]}.${v[1]}"
 version="${v[0]}.${v[1]}.${v[2]}"
 
@@ -8,7 +9,6 @@ echo -e "branch: \t\t$branch"
 echo -e "version: \t\t$version"
 echo -e "http_proxy: \t\t$HTTP_PROXY"
 echo -e "https_proxy: \t\t$HTTPS_PROXY"
-
 
 # Download source code
 curl -o LicenseVerifier.java -s https://raw.githubusercontent.com/elastic/elasticsearch/$branch/x-pack/plugin/core/src/main/java/org/elasticsearch/license/LicenseVerifier.java
