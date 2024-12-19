@@ -28,6 +28,7 @@ jobs:
       - name: Upload Jar
         uses: actions/download-artifact@v4
         with:
+          name: x-pack-core-${{ github.event.inputs.tag_name }}
           path: ./output/*.jar
           
       - name: Upload Jar to GitHub Releases
