@@ -34,9 +34,9 @@ jobs:
           path: output
           
       - name: Upload Jar to GitHub Releases
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v2
         with:
-          artifacts: output/*.jar
+          files: ./output/*.jar
           generateReleaseNotes: true
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
