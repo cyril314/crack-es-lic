@@ -35,10 +35,10 @@ jobs:
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
+          artifacts: "output/*.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.inputs.tag_name }}
           name: "Jar Release"
           body: |
             This release includes:
             - Built Jar on GitHub Actions.
-          files: ./output/*.zip
