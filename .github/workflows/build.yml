@@ -25,16 +25,14 @@ jobs:
       - name: Build Jar
         run: bash crack.sh ${{ github.event.inputs.tag_name }}
 
-  release:
-    needs: build
-    runs-on: ubuntu-22.04
-    steps:
       - name: Build Jar
-        run: pwd && ls .
+        run: pwd && ls "`pwd`"
+        
       - name: Upload Jar
         uses: actions/download-artifact@v4
         with:
           path: output
+          
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
