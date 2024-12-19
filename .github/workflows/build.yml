@@ -29,12 +29,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: x-pack-core-${{ github.event.inputs.tag_name }}
-          path: ./output/*.jar
+          path: /home/runner/work/crack-es-lic/crack-es-lic/output/*.jar
           
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ./output/*.jar
+          artifacts: /home/runner/work/crack-es-lic/crack-es-lic/output/*.jar
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.inputs.tag_name }}
           name: "Jar Release"
