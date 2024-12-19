@@ -10,4 +10,4 @@ service_name="elastic-crack"
 
 docker build --no-cache -f Dockerfile --build-arg VERSION="${version}" --tag ${service_name}:${version} .
 
-docker run -it --rm -v $(pwd)/output:/crack/output docker.io/library/${service_name}:${version}
+docker run --rm -v $(pwd)/output:/crack/output docker.io/library/${service_name}:${version}
