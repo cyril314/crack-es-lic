@@ -25,7 +25,7 @@ jobs:
       - name: Build Jar
         run: bash crack.sh ${{ github.event.inputs.tag_name }}
 
-      - name: Build Jar
+      - name: Check Dir
         run: pwd && ls "`pwd`"
         
       - name: Upload Jar
