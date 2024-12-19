@@ -30,12 +30,14 @@ jobs:
         with:
           name: x-pack-core-${{ github.event.inputs.tag_name }}
           path: output/*.jar
-      - name: Check files
+          
+      - name: Check Files
         run: pwd && ls ./output/
+        
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ./output/*.jar
+          artifacts: /home/runner/work/crack-es-lic/crack-es-lic/output/*.jar
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.inputs.tag_name }}
