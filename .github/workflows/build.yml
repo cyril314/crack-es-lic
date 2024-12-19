@@ -25,16 +25,16 @@ jobs:
       - name: Build jar
         run: bash crack.sh ${{ github.event.inputs.tag_name }}
 
-      - name: Upload jar
+      - name: Upload zip
         uses: actions/upload-artifact@v4
         with:
           name: es-jar
-          path: ./output/*.jar
+          path: ./output/es-jar.zip
           
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: app/build/outputs/apk/release/*.apk
+          artifacts: ./output/es-jar.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.inputs.tag_name }}
           name: "Jar Release"
