@@ -34,9 +34,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: ./*.*
+          allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.event.inputs.tag_name }}
-          name: "Jar Release"
           body: |
             This release includes:
             - Built Jar on GitHub Actions.
