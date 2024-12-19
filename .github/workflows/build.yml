@@ -23,20 +23,17 @@ jobs:
           java-version: '8'
 
       - name: Build Jar
-        run: bash crack.sh ${{ github.event.inputs.tag_name }}
+        run: bash crack.sh ${{ github.event.inputs.tag_name }} && pwd && ls "`pwd`"
 
-      - name: Check Dir
-        run: pwd && ls "`pwd`"
-        
       - name: Upload Jar
         uses: actions/download-artifact@v4
         with:
-          path: output
+          path: output/*.jar
           
       - name: Upload Jar to GitHub Releases
         uses: ncipollo/release-action@v1
         with:
-          files: ./output/*.jar
+          artifacts: output/*.jar
           generateReleaseNotes: true
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
