@@ -1,8 +1,9 @@
 ARG VERSION
+ARG JDKVER
 
 FROM elasticsearch:${VERSION} AS Baseline
 
-FROM eclipse-temurin:20.0.1_9-jdk
+FROM eclipse-temurin:${JDKVER}-jdk-ubi9-minimal
 
 
 ARG VERSION
