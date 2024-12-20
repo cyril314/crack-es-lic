@@ -23,6 +23,6 @@ else
     echo "Using JDK $jdk_ver for Elasticsearch version $version "
 fi
 
-docker build --no-cache -f Dockerfile --build-arg VERSION="${version}" JDKVER="${jdk_ver}" --tag ${service_name}:${version} .
+docker build --no-cache -f Dockerfile --build-arg VERSION="${version}" --build-arg JDKVER="${jdk_ver}" --tag ${service_name}:${version} .
 
 docker run --rm -v $(pwd)/output:/crack/output docker.io/library/${service_name}:${version}
