@@ -18,7 +18,7 @@ jobs:
 
       - name: Set JDK version based on ES version
         run: |
-          ES_VERSION="${{ github.event.inputs.es_version }}"
+          ES_VERSION="${{ github.event.inputs.tag_name }}"
           # Determine JDK version based on Elasticsearch version
           if [[ "$(echo $ES_VERSION | cut -d'.' -f1)" -ge 8 ]]; then
             echo "Using JDK 17 for Elasticsearch version $ES_VERSION (>= 7.x)"
