@@ -27,14 +27,14 @@ jobs:
             ES_VERSION="${{ github.event.inputs.tag_name }}"
             # Determine JDK version based on Elasticsearch version
             if [[ "$(echo $ES_VERSION | cut -d'.' -f1)" -ge 8 ]]; then
-              echo "Using JDK 17 for Elasticsearch version $ES_VERSION (>= 7.x)"
-              echo "JAVA_VERSION=17" >> $GITHUB_ENV
+              echo "Using JDK 20 for Elasticsearch version $ES_VERSION (>= 7.x)"
+              echo "JAVA_VERSION=20" >> $GITHUB_ENV
             elif [[ "$(echo $ES_VERSION | cut -d'.' -f1)" -lt 7 ]]; then
               echo "Using JDK 1.8 for Elasticsearch version $ES_VERSION (< 7.x)"
               echo "JAVA_VERSION=8" >> $GITHUB_ENV
             else
-              echo "Using JDK 20 for Elasticsearch version $ES_VERSION (<= 7.x)"
-              echo "JAVA_VERSION=20" >> $GITHUB_ENV
+              echo "Using JDK 11 for Elasticsearch version $ES_VERSION (<= 7.x)"
+              echo "JAVA_VERSION=11" >> $GITHUB_ENV
             fi
           fi
           
