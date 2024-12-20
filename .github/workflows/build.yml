@@ -45,7 +45,7 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Build Jar
-        run: java -version && bash crack.sh ${{ github.event.inputs.tag_name }} && pwd && ls "`pwd`"
+        run: bash crack.sh ${{ github.event.inputs.tag_name }} && pwd && ls "`pwd`"
 
       - name: Upload Jar
         uses: actions/upload-artifact@v4
