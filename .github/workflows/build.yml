@@ -46,10 +46,12 @@ jobs:
 
       - name: Build Jar
         run: |
-          jdk_path=$(find /opt/hostedtoolcache -type d -name '*jdk*' -print -quit)
+          javac_path="$(find /opt/hostedtoolcache -type f -name 'javac' | head -n 1)"
+          jdk_path="$(dirname $(dirname $(readlink -f $javac_path)))"
           echo "JDK Path: $jdk_path"
           echo "JAVA_HOME=$jdk_path" >> $GITHUB_ENV
           echo "PATH=$jdk_path/bin:$PATH" >> $GITHUB_ENV
+          java -version
           bash crack.sh ${{ github.event.inputs.tag_name }} && pwd && ls "`pwd`"
 
       - name: Upload Jar
