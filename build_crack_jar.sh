@@ -24,10 +24,6 @@ sed -i 's/CODE/            return true;\n    }\n/g' LicenseVerifier.java
 sed -i 's/path.toString().endsWith(".jar")/false/g' XPackBuild.java
 
 # Build calss file
-java -version
-JAVA_BIN_PATH=$(which java)
-echo "Java binary path: $JAVA_BIN_PATH"
-
 javac -cp "/usr/share/elasticsearch/lib/*:/usr/share/elasticsearch/modules/x-pack-core/*" LicenseVerifier.java
 javac -cp "/usr/share/elasticsearch/lib/*:/usr/share/elasticsearch/modules/x-pack-core/*" XPackBuild.java
 
