@@ -7,8 +7,6 @@ on:
         description: 'Version Tag Name'
         required: true
         default: '8.0.0'
-      jdk_ver:
-        description: 'Version Jdk'
 
 jobs:
   build:
@@ -18,41 +16,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set JDK version based on ES version
-        run: |
-          JDK_VER="${{ github.event.inputs.jdk_ver }}"
-          if [ -z "$JDK_VER" ]; then
-            ES_VERSION="${{ github.event.inputs.tag_name }}"
-            # Determine JDK version based on Elasticsearch version
-            if [[ "$(echo $ES_VERSION | cut -d'.' -f1)" -ge 8 ]]; then
-              echo "Using JDK 17 for Elasticsearch version $ES_VERSION (>= 7.x)"
-              echo "JAVA_VERSION=17" >> $GITHUB_ENV
-            elif [[ "$(echo $ES_VERSION | cut -d'.' -f1)" -lt 7 ]]; then
-              echo "Using JDK 8 for Elasticsearch version $ES_VERSION (< 7.x)"
-              echo "JAVA_VERSION=8" >> $GITHUB_ENV
-            else
-              echo "Using JDK 11 for Elasticsearch version $ES_VERSION (<= 7.x)"
-              echo "JAVA_VERSION=11" >> $GITHUB_ENV
-            fi
-          else
-            echo "JAVA_VERSION=$JDK_VER" >> $GITHUB_ENV
-          fi
-          
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: ${{ env.JAVA_VERSION }}
-
       - name: Build Jar
-        run: |
-          javac_path="$(find /opt/hostedtoolcache -type f -name 'javac' | head -n 1)"
-          jdk_path="$(dirname $(dirname $(readlink -f $javac_path)))"
-          echo "JDK Path: $jdk_path"
-          echo "JAVA_HOME=$jdk_path" >> $GITHUB_ENV
-          echo "PATH=$jdk_path/bin:$PATH" >> $GITHUB_ENV
-          java -version
-          bash crack.sh ${{ github.event.inputs.tag_name }} && pwd && ls "`pwd`"
+        run: bash crack.sh ${{ github.event.inputs.tag_name }} && pwd && ls "`pwd`"
 
       - name: Upload Jar
         uses: actions/upload-artifact@v4
