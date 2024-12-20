@@ -17,6 +17,6 @@ COPY --from=Baseline /usr/share/elasticsearch/lib /usr/share/elasticsearch/lib
 COPY --from=Baseline /usr/share/elasticsearch/modules/x-pack-core /usr/share/elasticsearch/modules/x-pack-core
 COPY build_crack_jar.sh /crack
 
-RUN apt update && apt install -y zip
+RUN dnf install -y zip && dnf clean all && zip -v
 
 CMD [ "bash", "build_crack_jar.sh" ]
