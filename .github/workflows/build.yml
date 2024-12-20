@@ -4,9 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'Version tag name'
+        description: 'Version Tag Name'
         required: true
         default: '8.0.0'
+      jdk_ver:
+        description: 'Version Jdk'
 
 jobs:
   build:
@@ -27,8 +29,12 @@ jobs:
             echo "Using JDK 1.8 for Elasticsearch version $ES_VERSION (< 7.x)"
             echo "JAVA_VERSION=8" >> $GITHUB_ENV
           else
-            echo "Using JDK 11 for Elasticsearch version $ES_VERSION (<= 7.x)"
-            echo "JAVA_VERSION=11" >> $GITHUB_ENV
+            echo "Using JDK 20 for Elasticsearch version $ES_VERSION (<= 7.x)"
+            echo "JAVA_VERSION=20" >> $GITHUB_ENV
+          fi
+
+          if [ -z "$jdk_ver" ]; then
+            echo "JAVA_VERSION=$jdk_ver" >> $GITHUB_ENV
           fi
 
       - name: Setup JDK
