@@ -8,7 +8,7 @@ jdk_ver=$2
 echo -e "\033[36mRun for version: ${version}\033[0m"
 mkdir output
 service_name="elastic-crack"
-if [ -z "$jdk_ver"];then
+if [ -z "$jdk_ver" ];then
     if [[ "$(echo $version | cut -d'.' -f1)" -ge 8 ]]; then
       echo "Using JDK 17 for Elasticsearch version $version (>= 7.x)"
       jdk_ver="17"
