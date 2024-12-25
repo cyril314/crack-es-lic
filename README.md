@@ -6,6 +6,9 @@
     $ cd /usr/share/elasticsearch/modules/x-pack-core/ && mv x-pack-core-8.0.0.jar x-pack-core-8.0.0.jar.bak
     $ mv x-pack-core-8.0.0.crack.jar x-pack-core-8.0.0.jar
     $ docker restart docker-elk_elasticsearch_1
+
+    # 删除容器数据
+    $ docker volume ls -q |grep elastic |xargs docker volume rm
     
     # linux系统中
     $ cp -f x-pack-core-8.0.0.jar  /usr/share/elasticsearch/modules/x-pack-core/
